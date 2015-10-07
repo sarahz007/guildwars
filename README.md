@@ -1,2 +1,2 @@
 # this_is_a_repository
-well, it's a test so don't expect anything
+I just started using GitHub so I am very welcome for any help
