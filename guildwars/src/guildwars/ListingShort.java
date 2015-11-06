@@ -25,6 +25,21 @@ public class ListingShort {
 			is.close();						  										//closes connection
 		}
 	}
+	
+	public static int[] createList (String list){
+		list = list.substring(list.indexOf("["),list.lastIndexOf( "]"));
+		list = list.replaceAll("[^0-9,]+", "");									//extracts only numbers and commas from previous string
+		String[] items = list.split(",");										//splits new string at commas and fills an array w/ numbers in string
+		int[] results = new int[items.length];
+		for (int i = 0; i < items.length; i++) {
+		    try {
+		        results[i] = Integer.parseInt(items[i]);
+		    }
+		    catch (NumberFormatException nfe) {};
+		}
+		return results;
+	}
+	
 	public static String outputList(int[] results){
 		List<Listing> finalListing = new ArrayList<>();
 		for (int a = 2; a < results.length; a = a+3){
@@ -44,33 +59,12 @@ public class ListingShort {
 		String[] all = values.split("sells");
 		String buy = all[0];
 		String sell = all[1];
-		buy = buy.substring(buy.indexOf("["),buy.lastIndexOf( "]"));			//ignores text at the beginning and only displays content between []
-		sell = sell.substring(sell.indexOf("["),sell.lastIndexOf( "]"));
 		
-		buy = buy.replaceAll("[^0-9,]+", "");									//extracts only numbers and commas from previous string
-		String[] buyItems = buy.split(",");										//splits new string at commas and fills an array w/ numbers in string
-		int[] buyResults = new int[buyItems.length];
-		for (int i = 0; i < buyItems.length; i++) {
-		    try {
-		        buyResults[i] = Integer.parseInt(buyItems[i]);
-		    }
-		    catch (NumberFormatException nfe) {};
-		}
+		
 		System.out.println("Buy: " + "\n");
-		outputList(buyResults);
-		
-		sell = sell.replaceAll("[^0-9,]+", "");									
-		String[] sellItems = sell.split(",");
-		int[] sellResults = new int[sellItems.length];
-
-		for (int i = 0; i < sellItems.length; i++) {
-		    try {
-		        sellResults[i] = Integer.parseInt(sellItems[i]);
-		    }
-		    catch (NumberFormatException nfe) {};
-		}
+		outputList(createList(buy));
 		System.out.println("\n" + "Sell: " + "\n");
-		outputList(sellResults);
+		outputList(createList(sell));
 		
 	}
 }
