@@ -55,11 +55,9 @@ public class ListingShort {
 	
 	public static void main(String[] args) throws Exception {
 		String values = loadUrl("https://api.guildwars2.com/v2/commerce/listings/19684");
-		
 		String[] all = values.split("sells");
 		String buy = all[0];
 		String sell = all[1];
-		
 		
 		System.out.println("Buy: " + "\n");
 		outputList(createList(buy));
