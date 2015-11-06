@@ -8,9 +8,6 @@ import java.util.*;
 
 public class ListingShort {
 	public static void main(String[] args) throws Exception {
-		/*URLContent values =	new URLContent(values);
-		String list = values; 
-		*/
 		String values; 
 		String webPage = "https://api.guildwars2.com/v2/commerce/listings/19684";	//gets web address
 		URL url = new URL(webPage);						
@@ -39,23 +36,22 @@ public class ListingShort {
 		buy = buy.substring(buy.indexOf("["),buy.lastIndexOf( "]"));			//ignores text at the beginning and only displays content between []
 		sell = sell.substring(sell.indexOf("["),sell.lastIndexOf( "]"));
 		System.out.println(buy);
-		System.out.println(sell);
+		System.out.println(sell);												//gets content of String between [] and has an output on console
 		
-		buy = buy.replaceAll("[^0-9,]+", "");
-		sell = sell.replaceAll("[^0-9,]+", "");
+		buy = buy.replaceAll("[^0-9,]+", "");									//extracts only numbers and commas from previous string
 		System.out.println(buy);
 		System.out.println(sell);
-		String[] buyItems = buy.split(",");
+		String[] buyItems = buy.split(",");										//splits new string at commas and fills an array w/ numbers in string
 		int[] buyResults = new int[buyItems.length];
-
+		//fills int array with numbers from string array using Integer.parseInt
 		for (int i = 0; i < buyItems.length; i++) {
 		    try {
 		        buyResults[i] = Integer.parseInt(buyItems[i]);
 		    }
 		    catch (NumberFormatException nfe) {};
 		}
-		List buyList = new ArrayList();
-		
+		//the next block of code extracts numbers from the buy part of the initial string and puts it in a list like so: "quantity x unit price
+		//creates 3 int arrays and fills it with integers from previous int array "buyResults" and therefore only requires 1/3 in length than previous array
 		int[] buyListings = new int [buyResults.length/3];
 		int[] buyUnitPrice = new int [buyResults.length/3];
 		int[] buyQuantity = new int [buyResults.length/3];
@@ -72,60 +68,51 @@ public class ListingShort {
 		    buyQuantity[bq] = buyResults[y];
 		    bq++;
 		    }
+		
+		List buyList = new ArrayList();											//creates new list which is finally displayed
+		buyList.add("Buy:" + "\n");												//title for display
+		//fills list with "quantity x unit price
 		for (int z = 0; z < buyQuantity.length; z++){
-			buyList.add(buyQuantity[z] + "x " + buyUnitPrice[z]);
+			buyList.add(buyQuantity[z] + "x " + buyUnitPrice[z] + "\n");
+		}
+		System.out.println(buyList);
+		
+		/*the next block of code extracts numbers from the sell part of the initial string and puts it in a list like so: "quantity x unit price
+		 * other than it applies for the sell part, it is the same as for the buy part*/
+		sell = sell.replaceAll("[^0-9,]+", "");									
+		System.out.println(sell);
+		String[] sellItems = sell.split(",");
+		int[] sellResults = new int[sellItems.length];
+
+		for (int i = 0; i < sellItems.length; i++) {
+		    try {
+		        sellResults[i] = Integer.parseInt(sellItems[i]);
+		    }
+		    catch (NumberFormatException nfe) {};
 		}
 		
-		
-		
-		/*
+		int[] sellListings = new int [sellResults.length/3];
+		int[] sellUnitPrice = new int [sellResults.length/3];
+		int[] sellQuantity = new int [sellResults.length/3];
+		int sl = 0;
+		int su = 0;
+		int sq = 0;
+		for (int y = 0; y < sellResults.length; y++) {
+			sellListings[sl] = sellResults[y];
+		    sl++;
+			y++;
+		    sellUnitPrice[su] = sellResults[y];
+		    y++;
+		    su++;
+		    sellQuantity[sq] = sellResults[y];
+		    sq++;
+		    }
 		List sellList = new ArrayList();
-		List sellListings = new ArrayList();
-		List sellUnitPrice = new ArrayList();
-		List sellQuantity = new ArrayList();
-		
-	    String[] buySplit = buy.split("\\},\\{");
-	    String[] sellSplit = sell.split("\\},\\{");
-	    
-	    String buyCorrect = "";   
-	    for (int i =0; i < buySplit.length; i++){
-			buyCorrect = buyCorrect + "\n" + buySplit[i];
+		sellList.add("Sell:" + "\n");
+		for (int z = 0; z < sellQuantity.length; z++){
+			sellList.add(sellQuantity[z] + "x " + sellUnitPrice[z] + "\n");
 		}
-	    																					 	//splits strings buy and sell and appends content between {} to a new string 
-	    String sellCorrect = "";
-	    for (int i =0; i < sellSplit.length; i++){
-			sellCorrect = sellCorrect + "\n" + sellSplit[i];
-		}
-		
-		buyCorrect = buyCorrect.replace("[{", "");
-		sellCorrect = sellCorrect.replace("[{", "");
-		System.out.println(buyCorrect);
-		System.out.println(sellCorrect);
-		
-		String buyUnitPrice = "";
-		String buyQuantity = "";
-		String[] getBuy = buyCorrect.split(",");
-		for (int x =0; x < getBuy.length; x++) {
-			x++;
-			buyUnitPrice = buyUnitPrice + " " + getBuy[x];
-			x++;
-			buyQuantity = buyQuantity + " " + getBuy[x];
-		}
-		
-		String sellUnitPrice = "";
-		String sellQuantity = "";
-		String[] getSell = sellCorrect.split(",");
-		for (int x =0; x < getSell.length; x++) {
-			x++;
-			sellUnitPrice = sellUnitPrice + " " + getSell[x];
-			x++;
-			sellQuantity = sellQuantity + "\n" + getSell[x];
-		}
-		
-		System.out.println(buyUnitPrice);
-		System.out.println(buyQuantity);
-		System.out.println(sellUnitPrice);
-		System.out.println(sellQuantity);
-		*/
+		System.out.println(sellList);
+	
 	}
 }
