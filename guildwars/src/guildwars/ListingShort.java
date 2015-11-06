@@ -51,31 +51,15 @@ public class ListingShort {
 		    catch (NumberFormatException nfe) {};
 		}
 		//the next block of code extracts numbers from the buy part of the initial string and puts it in a list like so: "quantity x unit price
-		//creates 3 int arrays and fills it with integers from previous int array "buyResults" and therefore only requires 1/3 in length than previous array
-		int[] buyListings = new int [buyResults.length/3];
-		int[] buyUnitPrice = new int [buyResults.length/3];
-		int[] buyQuantity = new int [buyResults.length/3];
-		int bl = 0;
-		int bu = 0;
-		int bq = 0;
-		for (int y = 0; y < buyResults.length; y++) {
-			buyListings[bl] = buyResults[y];
-		    bl++;
-			y++;
-		    buyUnitPrice[bu] = buyResults[y];
-		    y++;
-		    bu++;
-		    buyQuantity[bq] = buyResults[y];
-		    bq++;
-		    }
-		
-		List buyList = new ArrayList();											//creates new list which is finally displayed
-		buyList.add("Buy:" + "\n");												//title for display
-		//fills list with "quantity x unit price
-		for (int z = 0; z < buyQuantity.length; z++){
-			buyList.add(buyQuantity[z] + "x " + buyUnitPrice[z] + "\n");
+		List finalBuyListing = new ArrayList();
+		for (int a = 2; a < buyResults.length; a = a+3){
+			Listing buyListObject = new Listing(buyResults[a], buyResults[a-1]);
+			finalBuyListing.add(buyListObject);
 		}
-		System.out.println(buyList);
+		System.out.println("Buy: " + "\n");
+		for (int c = 0; c < finalBuyListing.size(); c++){
+			System.out.println(((Listing) finalBuyListing.get(c)).getQuantity() + "x " + ((Listing) finalBuyListing.get(c)).getUnitPrice());
+		}
 		
 		/*the next block of code extracts numbers from the sell part of the initial string and puts it in a list like so: "quantity x unit price
 		 * other than it applies for the sell part, it is the same as for the buy part*/
@@ -90,31 +74,15 @@ public class ListingShort {
 		    }
 		    catch (NumberFormatException nfe) {};
 		}
-		
-		int[] sellListings = new int [sellResults.length/3];
-		int[] sellUnitPrice = new int [sellResults.length/3];
-		int[] sellQuantity = new int [sellResults.length/3];
-		int sl = 0;
-		int su = 0;
-		int sq = 0;
-		for (int y = 0; y < sellResults.length; y++) {
-			sellListings[sl] = sellResults[y];
-		    sl++;
-			y++;
-		    sellUnitPrice[su] = sellResults[y];
-		    y++;
-		    su++;
-		    sellQuantity[sq] = sellResults[y];
-		    sq++;
-		    }
-		List sellList = new ArrayList();
-		sellList.add("Sell:" + "\n");
-		for (int z = 0; z < sellQuantity.length; z++){
-			sellList.add(sellQuantity[z] + "x " + sellUnitPrice[z] + "\n");
+		List finalSellListing = new ArrayList();
+		for (int a = 2; a < buyResults.length; a = a+3){
+			Listing sellListObject = new Listing(sellResults[a], sellResults[a-1]);
+			finalSellListing.add(sellListObject);
 		}
-		System.out.println(sellList);
-		System.out.println(buy);
-		System.out.println(sell);
-	
+		System.out.println("");
+		System.out.println("Sell: " + "\n");
+		for (int c = 0; c < finalSellListing.size(); c++){
+			System.out.println(((Listing) finalSellListing.get(c)).getQuantity() + "x " + ((Listing) finalSellListing.get(c)).getUnitPrice());
+		}
 	}
 }
