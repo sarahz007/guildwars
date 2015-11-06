@@ -113,6 +113,8 @@ public class ListingShort {
 			sellList.add(sellQuantity[z] + "x " + sellUnitPrice[z] + "\n");
 		}
 		System.out.println(sellList);
+		System.out.println(buy);
+		System.out.println(sell);
 	
 	}
 }
