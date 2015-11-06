@@ -10,8 +10,8 @@ import java.io.*;
 
 public class Listing {
 
-	private int quantity;
-	private int unitPrice;
+	private static int quantity;
+	private static int unitPrice;
 		
 	public int getUnitPrice(){
 		return unitPrice;
@@ -33,11 +33,12 @@ public class Listing {
 		br = "\n";
 	}
 	
-	public void main (){
+	public static void main(String[] args){
 		List finalListing = new ArrayList();
 		Listing listobject = new Listing(quantity, "x ", unitPrice, "\n");
 		finalListing.add(listobject);
 		System.out.println(finalListing);
+		System.out.println("finalListing test");
 		
 	}
 }
