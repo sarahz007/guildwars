@@ -23,7 +23,7 @@ public class ListingShort {
 			}
 			values = sb.toString();													//creates String with content of page
 							
-			System.out.println(values);							//output on console -> String with content
+			//System.out.println(values);							//output on console -> String with content
 				
 		} 
 		finally {
@@ -35,12 +35,12 @@ public class ListingShort {
 		String sell = all[1];
 		buy = buy.substring(buy.indexOf("["),buy.lastIndexOf( "]"));			//ignores text at the beginning and only displays content between []
 		sell = sell.substring(sell.indexOf("["),sell.lastIndexOf( "]"));
-		System.out.println(buy);
-		System.out.println(sell);												//gets content of String between [] and has an output on console
+		//System.out.println(buy);
+		//System.out.println(sell);												//gets content of String between [] and has an output on console
 		
 		buy = buy.replaceAll("[^0-9,]+", "");									//extracts only numbers and commas from previous string
-		System.out.println(buy);
-		System.out.println(sell);
+		//System.out.println(buy);
+		//System.out.println(sell);
 		String[] buyItems = buy.split(",");										//splits new string at commas and fills an array w/ numbers in string
 		int[] buyResults = new int[buyItems.length];
 		//fills int array with numbers from string array using Integer.parseInt
@@ -80,7 +80,7 @@ public class ListingShort {
 		/*the next block of code extracts numbers from the sell part of the initial string and puts it in a list like so: "quantity x unit price
 		 * other than it applies for the sell part, it is the same as for the buy part*/
 		sell = sell.replaceAll("[^0-9,]+", "");									
-		System.out.println(sell);
+		//System.out.println(sell);
 		String[] sellItems = sell.split(",");
 		int[] sellResults = new int[sellItems.length];
 
