@@ -80,7 +80,7 @@ public class ListingShortTest {
 		listings.add(new Listing(1, 3));
 		
 		double avg = ListingShort.average(listings);
-		Assert.assertTrue(avg + " != " + (7.0 / 3.0), (7.0 / 3.0) == avg);
+		Assert.assertTrue(avg + " != " + (7/3), (7/3) == avg);
 	}
 	
 	@Test
@@ -91,15 +91,15 @@ public class ListingShortTest {
 		listings.add(new Listing(1, 3));
 		
 		double avg = ListingShort.average(listings);
-		Assert.assertTrue(avg + " != " + (15.0 / 12.0), (15.0 / 12.0) == avg);
+		Assert.assertTrue(avg + " != " + (15/12), (15/12) == avg);
 	}
 	
 	@Test
 	public void medianWithEmptyList() {
 		List<Listing> listings = new ArrayList<>();
 		
-		int med = ListingShort.median(listings);
-		Assert.assertEquals(0, med);
+		double med = ListingShort.median(listings);
+		Assert.assertTrue(med + " != " + 0, 0 == med);
 	}
 	
 	@Test
@@ -109,8 +109,8 @@ public class ListingShortTest {
 		listings.add(new Listing(1, 10));
 		listings.add(new Listing(1, 15));
 		
-		int med = ListingShort.median(listings);
-		Assert.assertEquals(10, med);
+		double med = ListingShort.median(listings);
+		Assert.assertTrue(med + " != " + 15.0, 15.0 == med);
 	}
 	
 	@Test
@@ -119,8 +119,8 @@ public class ListingShortTest {
 		listings.add(new Listing(1, 1));
 		listings.add(new Listing(1, 10));
 		
-		int med = ListingShort.median(listings);
-		Assert.assertEquals(5, med);
+		double med = ListingShort.median(listings);
+		Assert.assertTrue(med + " != " + 5.0, 5.0 == med);
 	}
 	
 	@Test
@@ -129,8 +129,8 @@ public class ListingShortTest {
 		listings.add(new Listing(10, 1));
 		listings.add(new Listing(1, 10));
 		
-		int med = ListingShort.median(listings);
-		Assert.assertEquals(1, med);
+		double med = ListingShort.median(listings);
+		Assert.assertTrue(med + " != " + 1, 1 == med);
 	}
 	
 	@Test
@@ -139,8 +139,8 @@ public class ListingShortTest {
 		listings.add(new Listing(2, 1));
 		listings.add(new Listing(2, 10));
 		
-		int med = ListingShort.median(listings);
-		Assert.assertTrue(5.5 == med);
+		double med = ListingShort.median(listings);
+		Assert.assertTrue(med + " != " + 5.0, 5.0 == med);
 	}
 	
 }

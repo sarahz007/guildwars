@@ -80,11 +80,9 @@ public class ListingShort {
 			max = 0;
 		} else{
 			for (int i = 0; i < finalListing.size(); i++){
-				if (max < finalListing.get(i).getUnitPrice()){
-					max = (finalListing.get(i).getUnitPrice());
+				max = Math.max(max, finalListing.get(i).getUnitPrice());
 				}
 			}
-		}
 		System.out.println("max: " + max);
 		return max;
 	}
@@ -92,26 +90,26 @@ public class ListingShort {
 	/**
 	 * puts all Unit Prices in a sorted array
 	 * scenario 1: length of the array is an odd number: returns value in the middle of the array
-	 * scenario 2: length of the array is an even number: return the two values in the middle 
+	 * scenario 2: length of the array is an even number: returns average of the two values in the middle 
 	 * @param finalListing
 	 * @return
 	 */
-	public static int median (List<Listing> finalListing){
+	public static double median (List<Listing> finalListing){
 		List<Integer> uP = new ArrayList<>();
-		int median;
+		double median;
 		if (finalListing.isEmpty()){
 			median = 0;
 		} else {
 			for (int i = 0; i < finalListing.size(); i++){
-				for(int x = 0; x < finalListing.get(x).getQuantity(); x++) {
-					uP.add(finalListing.get(x).getUnitPrice());
+				for(int x = 0; x < finalListing.get(i).getQuantity(); x++) {
+					uP.add(finalListing.get(i).getUnitPrice());
 				}
 			}
 			Collections.sort(uP);
 			if (uP.size() % 2 == 0) {
-				median = (uP.get(uP.size()/2) + uP.get(uP.size()/2 - 1))/2;
+				median = (uP.get(uP.size()/2) + uP.get(uP.size()/2 + 1))/2;
 			} else {
-				median = uP.get(uP.size()/2);
+				median = uP.get((uP.size()+1)/2);
 			}
 		}
 		System.out.println("median: " + median);
@@ -119,7 +117,7 @@ public class ListingShort {
 	}
 	
 	/**
-	 * calculates total sum of all Unit Price in the finalListing and divides total by number of Unit Prices
+	 * calculates total sum of all Unit Prices in finalListing and divides total by number of Unit Prices
 	 * @param finalListing
 	 * @return average
 	 */
@@ -132,8 +130,6 @@ public class ListingShort {
 		} else{
 			for (int i = 0; i < finalListing.size(); i++){
 				allQ += finalListing.get(i).getQuantity();
-			}
-			for (int i = 0; i < finalListing.size(); i++){
 				allUP += finalListing.get(i).getUnitPrice()*finalListing.get(i).getQuantity();
 			}
 			avg = allUP/allQ;
