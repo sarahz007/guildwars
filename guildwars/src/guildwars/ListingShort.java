@@ -97,11 +97,12 @@ public class ListingShort {
 	public static double median (List<Listing> finalListing){
 		List<Integer> uP = new ArrayList<>();
 		double median;
+		int allQ = 0;
 		if (finalListing.isEmpty()){
 			median = 0;
 		} else {
-			//allQ += finalListing.get(i).getQuantity();
 			for (int i = 0; i < finalListing.size(); i++){
+				allQ += finalListing.get(i).getQuantity();
 				for(int x = 0; x < finalListing.get(i).getQuantity(); x++) {
 					uP.add(finalListing.get(i).getUnitPrice());
 				}
