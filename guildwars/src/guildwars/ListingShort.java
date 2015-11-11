@@ -91,16 +91,17 @@ public class ListingShort {
 	 * @return
 	 */
 	public static int median (List<Listing> finalListing){
-		int[] up = new int[finalListing.size()];
-		for(int i = 0; i < finalListing.size(); i++){
-			up[i] = finalListing.get(i).getUnitPrice();
+		List<Integer> uP = new ArrayList<>();
+		for (int i = 0; i < finalListing.size(); i++){
+			
+			uP.add(finalListing.get(i).getUnitPrice());
 		}
 		int median;
-		Arrays.sort(up);
-		if (up.length % 2 == 0) {
-			median = (up[up.length/2] + up[up.length/2 - 1])/2;
+		Collections.sort(uP);
+		if (uP.size() % 2 == 0) {
+			median = (uP.get(uP.size()/2) + uP.get(uP.size()/2 - 1))/2;
 		} else {
-			median = up[up.length/2];
+			median = uP.get(uP.size()/2);
 		}
 		System.out.println("median: " + median);
 		return median;
