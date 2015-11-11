@@ -7,25 +7,28 @@ import java.net.URLConnection;
 import java.util.*;
 
 public class ListingShort {
+	
+	// opens Connection on server in the background, reads data from web page into a StringBuffer and closes connection
 	private static String loadUrl(String url) throws Exception {
 		URL urlObj = new URL(url);
-		URLConnection urlConnection = urlObj.openConnection();							//opens connection on server in the background
+		URLConnection urlConnection = urlObj.openConnection();							
 		InputStream is = urlConnection.getInputStream();							
 		try {
 			InputStreamReader isr = new InputStreamReader(is, "UTF-8");
 			int numCharsRead;
 			char[] content = new char[1024];
 			StringBuffer sb = new StringBuffer();
-			while ((numCharsRead = isr.read(content)) > 0) {						//StringBuffer continuously increases by data from web page
+			while ((numCharsRead = isr.read(content)) > 0) {						
 				sb.append(content, 0, numCharsRead);
 			}
 			return sb.toString();
 		} 
 		finally {
-			is.close();						  										//closes connection
+			is.close();						  										
 		}
 	}
 	
+	//returns array of all the numbers in the given String from the URL 
 	public static int[] createList (String list){
 		list = list.substring(list.indexOf("["),list.lastIndexOf( "]"));
 		list = list.replaceAll("[^0-9,]+", "");									//extracts only numbers and commas from previous string
@@ -40,6 +43,7 @@ public class ListingShort {
 		return results;
 	}
 	
+	// returns list with objects containing quantity and Unit Price, the value for "listing" is being ignored 
 	public static List<Listing> outputList(int[] results){
 		List<Listing> finalListing = new ArrayList<>();
 		for (int a = 2; a < results.length; a = a+3){
@@ -55,6 +59,7 @@ public class ListingShort {
 		return finalListing;
 	}
 	
+	//return minimum Unit Price of the List finalListing
 	public static int minimum(List<Listing> finalListing){
 		List<Integer> uP = new ArrayList<>();
 		for (int i = 0; i < finalListing.size(); i++){
@@ -66,6 +71,7 @@ public class ListingShort {
 		return min;	
 	}
 	
+	//returns maximum Unit Price of the List finalListing
 	public static int maximum(List<Listing> finalListing){
 		List<Integer> uP = new ArrayList<>();
 		for (int i = 0; i < finalListing.size(); i++){
@@ -77,6 +83,10 @@ public class ListingShort {
 		return max;
 	}
 	
+	/*puts all Unit Prices in a sorted array
+	 * scenario 1: length of the array is an odd number: returns value in the middle of the array
+	 * scenario 2: length of the array is an even number: return the two values in the middle
+	 */
 	public static int median (List<Listing> finalListing){
 		int[] up = new int[finalListing.size()];
 		for(int i = 0; i < finalListing.size(); i++){
@@ -91,6 +101,7 @@ public class ListingShort {
 		return median;
 	}
 	
+	//calculates total sum of all Unit Price in the finalListing and return average by dividing total by number of Unit Prices
 	public static double average (List<Listing> finalListing){
 		int all = 0;
 		for (int i = 0; i < finalListing.size(); i++){
@@ -100,11 +111,6 @@ public class ListingShort {
 		System.out.println("average: " + avg);
 		return avg;
 	}
-	
-	
-	//public int calculateMaximum
-	//public int calculateAverage
-	
 	
 	public static void main(String[] args) throws Exception {
 		String values = loadUrl("https://api.guildwars2.com/v2/commerce/listings/19684");
