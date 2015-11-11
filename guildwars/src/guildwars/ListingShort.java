@@ -29,7 +29,7 @@ public class ListingShort {
 	}
 	
 	//returns array of all the numbers in the given String from the URL 
-	public static int[] createList (String list){
+	private static int[] createList (String list){
 		list = list.substring(list.indexOf("["),list.lastIndexOf( "]"));
 		list = list.replaceAll("[^0-9,]+", "");									//extracts only numbers and commas from previous string
 		String[] items = list.split(",");										//splits new string at commas and fills an array w/ numbers in string
@@ -44,7 +44,7 @@ public class ListingShort {
 	}
 	
 	// returns list with objects containing quantity and Unit Price, the value for "listing" is being ignored 
-	public static List<Listing> outputList(int[] results){
+	private static List<Listing> outputList(int[] results){
 		List<Listing> finalListing = new ArrayList<>();
 		for (int a = 2; a < results.length; a = a+3){
 			Listing listObject = new Listing(results[a], results[a-1]);
@@ -61,15 +61,13 @@ public class ListingShort {
 	
 	//return minimum Unit Price of the List finalListing
 	public static int minimum(List<Listing> finalListing){
-		List<Integer> uP = new ArrayList<>();
-		int min;
+		int min = Integer.MAX_VALUE;
 		if (finalListing.isEmpty()){
 			min = 0;
 		} else {
 			for (int i = 0; i < finalListing.size(); i++){
-				uP.add(finalListing.get(i).getUnitPrice());
+				min = Math.min(min, finalListing.get(i).getUnitPrice());
 			}
-			min = Collections.min(uP);
 		}
 		System.out.println("min: " + min);
 		return min;	
@@ -77,15 +75,15 @@ public class ListingShort {
 	
 	//returns maximum Unit Price of the List finalListing
 	public static int maximum(List<Listing> finalListing){
-		List<Integer> uP = new ArrayList<>();
-		int max;
+		int max = 0;
 		if (finalListing.isEmpty()){
 			max = 0;
 		} else{
-			for (int i = 0; i < finalListing.size(); i++){			
-				uP.add(finalListing.get(i).getUnitPrice());
+			for (int i = 0; i < finalListing.size(); i++){
+				if (max < finalListing.get(i).getUnitPrice()){
+					max = (finalListing.get(i).getUnitPrice());
+				}
 			}
-			max = Collections.max(uP);
 		}
 		System.out.println("max: " + max);
 		return max;
@@ -105,7 +103,9 @@ public class ListingShort {
 			median = 0;
 		} else {
 			for (int i = 0; i < finalListing.size(); i++){
-				uP.add(finalListing.get(i).getUnitPrice()/finalListing.get(i).getQuantity());
+				for(int x = 0; x < finalListing.get(x).getQuantity(); x++) {
+					uP.add(finalListing.get(x).getUnitPrice());
+				}
 			}
 			Collections.sort(uP);
 			if (uP.size() % 2 == 0) {
@@ -124,15 +124,19 @@ public class ListingShort {
 	 * @return average
 	 */
 	public static double average (List<Listing> finalListing){
-		int all = 0;
+		int allUP = 0;
+		int allQ = 0;
 		double avg;
 		if (finalListing.isEmpty()){
 			avg = 0;
 		} else{
 			for (int i = 0; i < finalListing.size(); i++){
-			all += finalListing.get(i).getUnitPrice()/finalListing.get(i).getQuantity();
+				allQ += finalListing.get(i).getQuantity();
 			}
-		avg = all/finalListing.size();
+			for (int i = 0; i < finalListing.size(); i++){
+				allUP += finalListing.get(i).getUnitPrice()*finalListing.get(i).getQuantity();
+			}
+			avg = allUP/allQ;
 		}
 		System.out.println("average: " + avg);
 		return avg;
