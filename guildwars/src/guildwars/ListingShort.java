@@ -83,9 +83,12 @@ public class ListingShort {
 		return max;
 	}
 	
-	/*puts all Unit Prices in a sorted array
+	/**
+	 * puts all Unit Prices in a sorted array
 	 * scenario 1: length of the array is an odd number: returns value in the middle of the array
-	 * scenario 2: length of the array is an even number: return the two values in the middle
+	 * scenario 2: length of the array is an even number: return the two values in the middle 
+	 * @param finalListing
+	 * @return
 	 */
 	public static int median (List<Listing> finalListing){
 		int[] up = new int[finalListing.size()];
@@ -94,14 +97,20 @@ public class ListingShort {
 		}
 		int median;
 		Arrays.sort(up);
-		if (up.length % 2 == 0)
-			median = up[up.length/2] + up[up.length/2 - 1];
-		else median = up[up.length/2];
+		if (up.length % 2 == 0) {
+			median = (up[up.length/2] + up[up.length/2 - 1])/2;
+		} else {
+			median = up[up.length/2];
+		}
 		System.out.println("median: " + median);
 		return median;
 	}
 	
-	//calculates total sum of all Unit Price in the finalListing and return average by dividing total by number of Unit Prices
+	/**
+	 * calculates total sum of all Unit Price in the finalListing and divides total by number of Unit Prices
+	 * @param finalListing
+	 * @return average
+	 */
 	public static double average (List<Listing> finalListing){
 		int all = 0;
 		for (int i = 0; i < finalListing.size(); i++){
