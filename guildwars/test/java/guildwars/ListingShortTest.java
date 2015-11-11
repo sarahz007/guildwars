@@ -69,7 +69,7 @@ public class ListingShortTest {
 		listings.add(new Listing(1, 10));
 		
 		double avg = ListingShort.average(listings);
-		Assert.assertTrue(avg + " != " + 5.0, 5.0 == avg);
+		Assert.assertTrue(avg + " != " + 5.5, 5.5 == avg);
 	}
 	
 	@Test
@@ -80,7 +80,7 @@ public class ListingShortTest {
 		listings.add(new Listing(1, 3));
 		
 		double avg = ListingShort.average(listings);
-		Assert.assertTrue(avg + " != " + (7/3), (7/3) == avg);
+		Assert.assertTrue(avg + " != " + (7.0/3.0), (7.0/3.0) == avg);
 	}
 	
 	@Test
@@ -91,7 +91,7 @@ public class ListingShortTest {
 		listings.add(new Listing(1, 3));
 		
 		double avg = ListingShort.average(listings);
-		Assert.assertTrue(avg + " != " + (15/12), (15/12) == avg);
+		Assert.assertTrue(avg + " != " + (15.0/12.0), (15.0/12.0) == avg);
 	}
 	
 	@Test
@@ -116,7 +116,7 @@ public class ListingShortTest {
 	@Test
 	public void medianEvenLength() {
 		List<Listing> listings = new ArrayList<>();
-		listings.add(new Listing(1, 1));
+		listings.add(new Listing(3, 1));
 		listings.add(new Listing(1, 10));
 		
 		double med = ListingShort.median(listings);
@@ -140,7 +140,7 @@ public class ListingShortTest {
 		listings.add(new Listing(2, 10));
 		
 		double med = ListingShort.median(listings);
-		Assert.assertTrue(med + " != " + 5.0, 5.0 == med);
+		Assert.assertTrue(med + " != " + 10, 10 == med);
 	}
 	
 }

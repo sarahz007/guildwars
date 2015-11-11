@@ -100,6 +100,7 @@ public class ListingShort {
 		if (finalListing.isEmpty()){
 			median = 0;
 		} else {
+			//allQ += finalListing.get(i).getQuantity();
 			for (int i = 0; i < finalListing.size(); i++){
 				for(int x = 0; x < finalListing.get(i).getQuantity(); x++) {
 					uP.add(finalListing.get(i).getUnitPrice());
@@ -132,7 +133,7 @@ public class ListingShort {
 				allQ += finalListing.get(i).getQuantity();
 				allUP += finalListing.get(i).getUnitPrice()*finalListing.get(i).getQuantity();
 			}
-			avg = allUP/allQ;
+			avg = (double) allUP/ (double) allQ;
 		}
 		System.out.println("average: " + avg);
 		return avg;
@@ -145,17 +146,19 @@ public class ListingShort {
 		String sell = all[1];
 		
 		System.out.println("Buy: " + "\n");
+		List<Listing> buyOutputList = outputList(createList(buy));
+		List<Listing> sellOutputList = outputList(createList(sell));
 		outputList(createList(buy));
-		minimum(outputList(createList(buy)));
-		maximum(outputList(createList(buy)));
-		median(outputList(createList(buy)));
-		average(outputList(createList(buy)));
+		minimum(buyOutputList);
+		maximum(buyOutputList);
+		median(buyOutputList);
+		average(buyOutputList);
 		System.out.println("\n" + "Sell: " + "\n");
 		outputList(createList(sell));
-		minimum(outputList(createList(sell)));
-		maximum(outputList(createList(sell)));
-		median(outputList(createList(sell)));
-		average(outputList(createList(sell)));
+		minimum(sellOutputList);
+		maximum(sellOutputList);
+		median(sellOutputList);
+		average(sellOutputList);
 	}
 	
 }
