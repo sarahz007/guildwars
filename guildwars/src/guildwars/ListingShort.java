@@ -62,11 +62,15 @@ public class ListingShort {
 	//return minimum Unit Price of the List finalListing
 	public static int minimum(List<Listing> finalListing){
 		List<Integer> uP = new ArrayList<>();
-		for (int i = 0; i < finalListing.size(); i++){
-			
-			uP.add(finalListing.get(i).getUnitPrice());
+		int min;
+		if (finalListing.isEmpty()){
+			min = 0;
+		} else {
+			for (int i = 0; i < finalListing.size(); i++){
+				uP.add(finalListing.get(i).getUnitPrice());
+			}
+			min = Collections.min(uP);
 		}
-		int min =Collections.min(uP);
 		System.out.println("min: " + min);
 		return min;	
 	}
@@ -74,11 +78,15 @@ public class ListingShort {
 	//returns maximum Unit Price of the List finalListing
 	public static int maximum(List<Listing> finalListing){
 		List<Integer> uP = new ArrayList<>();
-		for (int i = 0; i < finalListing.size(); i++){
-			
-			uP.add(finalListing.get(i).getUnitPrice());
+		int max;
+		if (finalListing.isEmpty()){
+			max = 0;
+		} else{
+			for (int i = 0; i < finalListing.size(); i++){			
+				uP.add(finalListing.get(i).getUnitPrice());
+			}
+			max = Collections.max(uP);
 		}
-		int max = Collections.max(uP);
 		System.out.println("max: " + max);
 		return max;
 	}
@@ -92,16 +100,19 @@ public class ListingShort {
 	 */
 	public static int median (List<Listing> finalListing){
 		List<Integer> uP = new ArrayList<>();
-		for (int i = 0; i < finalListing.size(); i++){
-			
-			uP.add(finalListing.get(i).getUnitPrice());
-		}
 		int median;
-		Collections.sort(uP);
-		if (uP.size() % 2 == 0) {
-			median = (uP.get(uP.size()/2) + uP.get(uP.size()/2 - 1))/2;
+		if (finalListing.isEmpty()){
+			median = 0;
 		} else {
-			median = uP.get(uP.size()/2);
+			for (int i = 0; i < finalListing.size(); i++){
+				uP.add(finalListing.get(i).getUnitPrice()/finalListing.get(i).getQuantity());
+			}
+			Collections.sort(uP);
+			if (uP.size() % 2 == 0) {
+				median = (uP.get(uP.size()/2) + uP.get(uP.size()/2 - 1))/2;
+			} else {
+				median = uP.get(uP.size()/2);
+			}
 		}
 		System.out.println("median: " + median);
 		return median;
@@ -114,10 +125,15 @@ public class ListingShort {
 	 */
 	public static double average (List<Listing> finalListing){
 		int all = 0;
-		for (int i = 0; i < finalListing.size(); i++){
-			all += finalListing.get(i).getUnitPrice();
+		double avg;
+		if (finalListing.isEmpty()){
+			avg = 0;
+		} else{
+			for (int i = 0; i < finalListing.size(); i++){
+			all += finalListing.get(i).getUnitPrice()/finalListing.get(i).getQuantity();
+			}
+		avg = all/finalListing.size();
 		}
-		double avg = all/finalListing.size();
 		System.out.println("average: " + avg);
 		return avg;
 	}

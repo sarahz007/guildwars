@@ -31,7 +31,7 @@ public class ListingShortTest {
 		List<Listing> listings = new ArrayList<>();
 		
 		int max = ListingShort.maximum(listings);
-		Assert.assertEquals(10, max);
+		Assert.assertEquals(0, max);
 	}
 	
 	@Test
@@ -49,7 +49,7 @@ public class ListingShortTest {
 		List<Listing> listings = new ArrayList<>();
 		
 		double avg = ListingShort.average(listings);
-		Assert.assertTrue(avg + " != " + 5.5, 5.5 == avg);
+		Assert.assertTrue(avg + " != " + 0.0, 0.0 == avg);
 	}
 	
 	@Test
@@ -67,7 +67,7 @@ public class ListingShortTest {
 		List<Listing> listings = new ArrayList<>();
 		
 		int med = ListingShort.median(listings);
-		Assert.assertEquals(1, med);
+		Assert.assertEquals(0, med);
 	}
 	
 	@Test
