@@ -120,6 +120,10 @@ public class ListingShort {
 	}
 	
 	public static void main(String[] args) throws Exception {
+		TradingPost tradingPost = new TradingPost();
+		ItemCharacteristics itemCharacteristics = tradingPost.getCharacteristics();
+		
+		/*
 		String values = loadUrl("https://api.guildwars2.com/v2/commerce/listings/19684");
 		String[] all = values.split("sells");
 		String buy = all[0];
@@ -148,6 +152,7 @@ public class ListingShort {
 			System.out.println("max: " + sellCharacteristics.get(a).getMaximum());
 			System.out.println("avg: " + sellCharacteristics.get(a).getAverage());
 		}
+		*/
 		
 	
 	}
