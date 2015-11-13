@@ -7,6 +7,11 @@ import java.net.URLConnection;
 import java.util.*;
 
 public class TradingPost {
+	private String url;
+
+	public TradingPost(String url) {
+		this.url = url;
+	}
 
 	// opens Connection on server in the background, reads data from web page
 	// into a StringBuffer and closes connection
@@ -116,25 +121,24 @@ public class TradingPost {
 
 	public ItemCharacteristics getCharacteristics() throws Exception {
 
-		String values = loadUrl("https://api.guildwars2.com/v2/commerce/listings/19684");
+		String values = loadUrl(url);
 		String[] all = values.split("sells");
 		String buy = all[0];
 		String sell = all[1];
-		ItemCharacteristics itemCharacteristics = new ItemCharacteristics(getCharacteristics(outputList(createList(buy))), getCharacteristics(outputList(createList(sell))));
-		//itemCharacteristics.setBuyCharacteristics(getCharacteristics(outputList(createList(buy))));
-		//itemCharacteristics.setSellCharacteristics(getCharacteristics(outputList(createList(sell))));
+		ItemCharacteristics itemCharacteristics = new ItemCharacteristics(
+				getCharacteristics(outputList(createList(buy))), getCharacteristics(outputList(createList(sell))));
+		// itemCharacteristics.setBuyCharacteristics(getCharacteristics(outputList(createList(buy))));
+		// itemCharacteristics.setSellCharacteristics(getCharacteristics(outputList(createList(sell))));
 
 		return itemCharacteristics;
 
-		/* 
-		 * Buy
-		 * List<Listing> buyOutputList = outputList(createList(buy));
-		 * median(buyOutputList); 
-		 * List<Characteristics> buyCharacteristics = new ArrayList<>();
+		/*
+		 * Buy List<Listing> buyOutputList = outputList(createList(buy));
+		 * median(buyOutputList); List<Characteristics> buyCharacteristics = new
+		 * ArrayList<>();
 		 * buyCharacteristics.add(getCharacteristics(buyOutputList));
 		 * 
-		 * Sell
-		 * List<Listing> sellOutputList = outputList(createList(sell));
+		 * Sell List<Listing> sellOutputList = outputList(createList(sell));
 		 * median(sellOutputList);
 		 * sellCharacteristics.add(getCharacteristics(sellOutputList));
 		 */
