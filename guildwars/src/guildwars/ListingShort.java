@@ -3,7 +3,7 @@ package guildwars;
 public class ListingShort {
 
 	public static void main(String[] args) throws Exception {
-		TradingPost tradingPost = new TradingPost("https://api.guildwars2.com/v2/commerce/listings/19684");
+		TradingPost tradingPost = new TradingPost(args [0]);
 		ItemCharacteristics itemCharacteristics = tradingPost.getCharacteristics();
 		
 		System.out.println("Buy: " + "\n");
