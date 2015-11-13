@@ -59,36 +59,6 @@ public class ListingShort {
 		return finalListing;
 	}
 	
-	//return minimum Unit Price of the List finalListing
-	public static int minimum(List<Listing> finalListing){
-		int min = Integer.MAX_VALUE;
-		if (finalListing.isEmpty()){
-			min = 0;
-		} else {
-			for (int i = 0; i < finalListing.size(); i++){
-				min = Math.min(min, finalListing.get(i).getUnitPrice());
-			}
-		}
-		Kennwerte.setMinimum(min);
-		//System.out.println("min: " + min);
-		return min;	
-	}
-	
-	//returns maximum Unit Price of the List finalListing
-	public static int maximum(List<Listing> finalListing){
-		int max = 0;
-		if (finalListing.isEmpty()){
-			max = 0;
-		} else{
-			for (int i = 0; i < finalListing.size(); i++){
-				max = Math.max(max, finalListing.get(i).getUnitPrice());
-				}
-			}
-		Kennwerte.setMaximum(max);
-		//System.out.println("max: " + max);
-		return max;
-	}
-	
 	/**
 	 * puts all Unit Prices in a sorted array
 	 * scenario 1: length of the array is an odd number: returns value in the middle of the array
@@ -96,7 +66,8 @@ public class ListingShort {
 	 * @param finalListing
 	 * @return
 	 */
-	public static double median (List<Listing> finalListing){
+	/*
+	private static double median (List<Listing> finalListing){
 		List<Integer> uP = new ArrayList<>();
 		double median;
 		if (finalListing.isEmpty()){
@@ -116,29 +87,36 @@ public class ListingShort {
 		}
 		System.out.println("median: " + median);
 		return median;
-	}
+	*/	
+	
 	
 	/**
-	 * calculates total sum of all Unit Prices in finalListing and divides total by number of Unit Prices
+	 * calculates minimum Unit Price of the List finalListing, maximum Unit Price of the List finalListing and average Unit Price
 	 * @param finalListing
-	 * @return average
+	 * @return characteristics
 	 */
-	public static double average (List<Listing> finalListing){
+	public static Characteristics getCharacteristics(List<Listing> finalListing) {
+		int min = Integer.MAX_VALUE;
+		int max = 0;
 		int allUP = 0;
 		int allQ = 0;
 		double avg;
 		if (finalListing.isEmpty()){
-			avg = 0;
+			min = 0;
+			max = 0;
+			avg = 0.0;
 		} else{
-			for (int i = 0; i < finalListing.size(); i++){
-				allQ += finalListing.get(i).getQuantity();
-				allUP += finalListing.get(i).getUnitPrice()*finalListing.get(i).getQuantity();
+			for (Listing listing : finalListing){
+				min = Math.min(min, listing.getUnitPrice());
+				max = Math.max(max, listing.getUnitPrice());
+				allQ += listing.getQuantity();
+				allUP += listing.getUnitPrice()*listing.getQuantity();
 			}
 			avg = (double) allUP/ (double) allQ;
-		}
-		Kennwerte.setAverage(avg);
-		//System.out.println("average: " + avg);
-		return avg;
+		}	
+		
+		Characteristics characteristics = new Characteristics (min, max, avg);
+		return characteristics;
 	}
 	
 	public static void main(String[] args) throws Exception {
@@ -150,35 +128,25 @@ public class ListingShort {
 		//Buy
 		System.out.println("Buy: " + "\n");
 		List<Listing> buyOutputList = outputList(createList(buy));
-		outputList(createList(buy));
-		minimum(buyOutputList);
-		maximum(buyOutputList);
-		median(buyOutputList);
-		average(buyOutputList);
-		List<Kennwerte> buyKennwerte = new ArrayList<>();
-		Kennwerte kennwerteBuy = new Kennwerte (minimum(buyOutputList), maximum(buyOutputList), average(buyOutputList));
-		buyKennwerte.add(kennwerteBuy);
-		for (int a = 0; a < buyKennwerte.size(); a++){
-			System.out.println("min: " + buyKennwerte.get(a).getMinimum());
-			System.out.println("max: " + buyKennwerte.get(a).getMaximum());
-			System.out.println("avg: " + buyKennwerte.get(a).getAverage());
+		//median(buyOutputList);
+		List<Characteristics> buyCharacteristics = new ArrayList<>();
+		buyCharacteristics.add(getCharacteristics(buyOutputList));
+		for (int a = 0; a < buyCharacteristics.size(); a++){
+			System.out.println("min: " + buyCharacteristics.get(a).getMinimum());
+			System.out.println("max: " + buyCharacteristics.get(a).getMaximum());
+			System.out.println("avg: " + buyCharacteristics.get(a).getAverage());
 		}
 		
 		//Sell
 		System.out.println("\n" + "Sell: " + "\n");
 		List<Listing> sellOutputList = outputList(createList(sell));
-		outputList(createList(sell));
-		minimum(sellOutputList);
-		maximum(sellOutputList);
-		median(sellOutputList);
-		average(sellOutputList);
-		List<Kennwerte> sellKennwerte = new ArrayList<Kennwerte>();
-		Kennwerte kennwerteSell = new Kennwerte (minimum(sellOutputList), maximum(sellOutputList), average(sellOutputList));
-		sellKennwerte.add(kennwerteSell);
-		for (int a = 0; a < sellKennwerte.size(); a++){
-			System.out.println("min: " + sellKennwerte.get(a).getMinimum());
-			System.out.println("max: " + sellKennwerte.get(a).getMaximum());
-			System.out.println("avg: " + sellKennwerte.get(a).getAverage());
+		//median(sellOutputList);
+		List<Characteristics> sellCharacteristics = new ArrayList<Characteristics>();
+		sellCharacteristics.add(getCharacteristics(sellOutputList));
+		for (int a = 0; a < sellCharacteristics.size(); a++){
+			System.out.println("min: " + sellCharacteristics.get(a).getMinimum());
+			System.out.println("max: " + sellCharacteristics.get(a).getMaximum());
+			System.out.println("avg: " + sellCharacteristics.get(a).getAverage());
 		}
 		
 	

@@ -9,92 +9,41 @@ import org.junit.Test;
 public class ListingShortTest {
 
 	@Test
-	public void minimumWithEmptyList() {
+	public void characteristicsWithEmptyList() {
 		List<Listing> listings = new ArrayList<>();
 		
-		int min = ListingShort.minimum(listings);
-		Assert.assertEquals(0, min);
+	Characteristics charac = ListingShort.getCharacteristics(listings);
+		Assert.assertEquals(0, charac.getMinimum());
+		Assert.assertEquals(0, charac.getMaximum());
+		Assert.assertTrue(charac.getAverage() + " != " + 0.0, 0.0 == charac.getAverage());
 	}
 
 	@Test
-	public void minimum() {
+	public void characteristics() {
 		List<Listing> listings = new ArrayList<>();
 		listings.add(new Listing(1, 1));
 		listings.add(new Listing(1, 10));
 		
-		int min = ListingShort.minimum(listings);
-		Assert.assertEquals(1, min);
+		Characteristics charac = ListingShort.getCharacteristics(listings);
+		Assert.assertEquals(1, charac.getMinimum());
+		Assert.assertEquals(10, charac.getMaximum());
+		Assert.assertTrue(charac.getAverage() + " != " + 5.5, 5.5 == charac.getAverage());
 	}
 
 	@Test
-	public void minimumWithQuantity() {
-		List<Listing> listings = new ArrayList<>();
-		listings.add(new Listing(1, 1));
-		listings.add(new Listing(10, 10));
-		
-		int min = ListingShort.minimum(listings);
-		Assert.assertEquals(1, min);
-	}
-	
-	@Test
-	public void maximumWithEmptyList() {
-		List<Listing> listings = new ArrayList<>();
-		
-		int max = ListingShort.maximum(listings);
-		Assert.assertEquals(0, max);
-	}
-	
-	@Test
-	public void maximum() {
-		List<Listing> listings = new ArrayList<>();
-		listings.add(new Listing(1, 1));
-		listings.add(new Listing(1, 10));
-		
-		int max = ListingShort.maximum(listings);
-		Assert.assertEquals(10, max);
-	}
-	
-	@Test
-	public void averageWithEmptyList() {
-		List<Listing> listings = new ArrayList<>();
-		
-		double avg = ListingShort.average(listings);
-		Assert.assertTrue(avg + " != " + 0.0, 0.0 == avg);
-	}
-	
-	@Test
-	public void averageSimple() {
-		List<Listing> listings = new ArrayList<>();
-		listings.add(new Listing(1, 1));
-		listings.add(new Listing(1, 10));
-		
-		double avg = ListingShort.average(listings);
-		Assert.assertTrue(avg + " != " + 5.5, 5.5 == avg);
-	}
-	
-	@Test
-	public void average() {
-		List<Listing> listings = new ArrayList<>();
-		listings.add(new Listing(1, 2));
-		listings.add(new Listing(1, 2));
-		listings.add(new Listing(1, 3));
-		
-		double avg = ListingShort.average(listings);
-		Assert.assertTrue(avg + " != " + (7.0/3.0), (7.0/3.0) == avg);
-	}
-	
-	@Test
-	public void averageWithQuantity() {
+	public void characteristicsWithQuantity() {
 		List<Listing> listings = new ArrayList<>();
 		listings.add(new Listing(10, 1));
 		listings.add(new Listing(1, 2));
 		listings.add(new Listing(1, 3));
 		
-		double avg = ListingShort.average(listings);
-		Assert.assertTrue(avg + " != " + (15.0/12.0), (15.0/12.0) == avg);
+		Characteristics charac = ListingShort.getCharacteristics(listings);
+		Assert.assertEquals(1, charac.getMinimum());
+		Assert.assertEquals(3, charac.getMaximum());
+		Assert.assertTrue(charac.getAverage() + " != " + 15.0 / 12.0, 15.0 / 12.0 == charac.getAverage());
 	}
 	
-	@Test
+	/*@Test
 	public void medianWithEmptyList() {
 		List<Listing> listings = new ArrayList<>();
 		
@@ -141,6 +90,6 @@ public class ListingShortTest {
 		
 		double med = ListingShort.median(listings);
 		Assert.assertTrue(med + " != " + 10, 10 == med);
-	}
+	}*/
 	
 }
