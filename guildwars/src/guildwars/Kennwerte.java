@@ -2,29 +2,29 @@ package guildwars;
 
 public class Kennwerte {
 	
-	private int minimum;
-	private int maximum;
-	private int average;
+	private static int minimum;
+	private static int maximum;
+	private static double average;
 		
 	public int getMinimum(){
 		return minimum;
 	}
-	public void setMinimum(int min){
+	public static void setMinimum(int min){
 		minimum = min; 
 	}
 	public int getMaximum(){
 		return maximum;
 	}
-	public void setMaximum(int max){
+	public static void setMaximum(int max){
 		maximum = max; 
 	}
-	public int getAverage(){
+	public double getAverage(){
 		return average;
 	}
-	public void setAverage(int avg){
+	public static void setAverage(double avg){
 		average = avg;
 	}
-	public Kennwerte(int min, int max, int avg) {
+	public Kennwerte(int min, int max, double avg) {
 		minimum = min;
 		maximum = max;
 		average = avg;
