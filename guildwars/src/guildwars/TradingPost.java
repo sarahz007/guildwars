@@ -69,28 +69,8 @@ public class TradingPost {
 	}
 
 	/**
-	 * puts all Unit Prices in a sorted array scenario 1: length of the array is
-	 * an odd number: returns value in the middle of the array scenario 2:
-	 * length of the array is an even number: returns average of the two values
-	 * in the middle
-	 * 
-	 * @param finalListing
-	 * @return
-	 */
-	/*
-	 * private static double median (List<Listing> finalListing){ List<Integer>
-	 * uP = new ArrayList<>(); double median; if (finalListing.isEmpty()){
-	 * median = 0; } else { for (int i = 0; i < finalListing.size(); i++){
-	 * for(int x = 0; x < finalListing.get(i).getQuantity(); x++) {
-	 * uP.add(finalListing.get(i).getUnitPrice()); } } Collections.sort(uP); if
-	 * (uP.size() % 2 == 0) { median = (uP.get(uP.size()/2) + uP.get(uP.size()/2
-	 * + 1))/2; } else { median = uP.get((uP.size()+1)/2); } }
-	 * System.out.println("median: " + median); return median;
-	 */
-
-	/**
 	 * calculates minimum Unit Price of the List finalListing, maximum Unit
-	 * Price of the List finalListing and average Unit Price
+	 * Price of the List finalListing, average Unit Price and median
 	 * 
 	 * @param finalListing
 	 * @return characteristics
@@ -101,21 +81,32 @@ public class TradingPost {
 		int allUP = 0;
 		int allQ = 0;
 		double avg;
+		double median;
+		List<Integer> uP = new ArrayList<>();
 		if (finalListing.isEmpty()) {
 			min = 0;
 			max = 0;
 			avg = 0.0;
+			median = 0.0;
 		} else {
 			for (Listing listing : finalListing) {
 				min = Math.min(min, listing.getUnitPrice());
 				max = Math.max(max, listing.getUnitPrice());
 				allQ += listing.getQuantity();
 				allUP += listing.getUnitPrice() * listing.getQuantity();
+				for(int x = 0; x < listing.getQuantity(); x++) {
+	  				uP.add(listing.getUnitPrice());
+				}
 			}
 			avg = (double) allUP / (double) allQ;
+			Collections.sort(uP); 
+	  		if (uP.size() % 2 == 0) {
+				median = (uP.get(uP.size()/2) + uP.get(uP.size()/2 + 1))/2; 
+			} else {
+			median = uP.get((uP.size()+1)/2); 
+			}
 		}
-
-		Characteristics characteristics = new Characteristics(min, max, avg);
+		Characteristics characteristics = new Characteristics(min, max, avg, median);
 		return characteristics;
 	}
 
@@ -125,22 +116,18 @@ public class TradingPost {
 		String[] all = values.split("sells");
 		String buy = all[0];
 		String sell = all[1];
-		ItemCharacteristics itemCharacteristics = new ItemCharacteristics(
-				getCharacteristics(outputList(createList(buy))), getCharacteristics(outputList(createList(sell))));
-		// itemCharacteristics.setBuyCharacteristics(getCharacteristics(outputList(createList(buy))));
-		// itemCharacteristics.setSellCharacteristics(getCharacteristics(outputList(createList(sell))));
-
+		ItemCharacteristics itemCharacteristics = new ItemCharacteristics(getCharacteristics(outputList(createList(buy))), getCharacteristics(outputList(createList(sell))));
+		
+		List<Listing> buyOutputList = outputList(createList(buy));
+		//median(buyOutputList); 
+		List<Characteristics> buyCharacteristics = new ArrayList<>();
+		buyCharacteristics.add(getCharacteristics(buyOutputList));
+		
+		List<Listing> sellOutputList = outputList(createList(sell));
+		//median(sellOutputList);
+		List<Characteristics> sellCharacteristics = new ArrayList<>();
+		sellCharacteristics.add(getCharacteristics(sellOutputList));
+		
 		return itemCharacteristics;
-
-		/*
-		 * Buy List<Listing> buyOutputList = outputList(createList(buy));
-		 * median(buyOutputList); List<Characteristics> buyCharacteristics = new
-		 * ArrayList<>();
-		 * buyCharacteristics.add(getCharacteristics(buyOutputList));
-		 * 
-		 * Sell List<Listing> sellOutputList = outputList(createList(sell));
-		 * median(sellOutputList);
-		 * sellCharacteristics.add(getCharacteristics(sellOutputList));
-		 */
 	}
 }

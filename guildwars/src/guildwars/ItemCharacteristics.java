@@ -21,8 +21,5 @@ public class ItemCharacteristics {
 		buyCharacteristics = buyChar;
 		sellCharacteristics = sellChar;
 	}
-	public ItemCharacteristics(){
-		
-	}
 
 }

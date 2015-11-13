@@ -5,6 +5,7 @@ public class Characteristics {
 	private int minimum;
 	private int maximum;
 	private double average;
+	private double median;
 		
 	public int getMinimum(){
 		return minimum;
@@ -24,9 +25,17 @@ public class Characteristics {
 	public void setAverage(double avg){
 		average = avg;
 	}
-	public Characteristics(int min, int max, double avg) {
+	public double getMedian() {
+		return median;
+	}
+	public void setMedian(double med) {
+		median = med;
+	}
+	public Characteristics(int min, int max, double avg, double med) {
 		minimum = min;
 		maximum = max;
 		average = avg;
+		median = med;
 	}
+	
 }
