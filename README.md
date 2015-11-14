@@ -1,2 +1,2 @@
-# this_is_a_repository
-I just started using GitHub so I am very welcome for any help
+# guildwars2
+developing a way to get statistics from an pobject using the hourly updated webpages 
