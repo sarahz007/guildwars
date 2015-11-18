@@ -1,9 +1,5 @@
 package guildwars;
 
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.*;
 
 public class TradingPost {
@@ -12,29 +8,12 @@ public class TradingPost {
 	public TradingPost(String url) {
 		this.url = url;
 	}
-
-	// opens Connection on server in the background, reads data from web page
-	// into a StringBuffer and closes connection
-	public String loadUrl(String url) throws Exception {
-		URL urlObj = new URL(url);
-		URLConnection urlConnection = urlObj.openConnection();
-		InputStream is = urlConnection.getInputStream();
-		try {
-			InputStreamReader isr = new InputStreamReader(is, "UTF-8");
-			int numCharsRead;
-			char[] content = new char[1024];
-			StringBuffer sb = new StringBuffer();
-			while ((numCharsRead = isr.read(content)) > 0) {
-				sb.append(content, 0, numCharsRead);
-			}
-			return sb.toString();
-		} finally {
-			is.close();
-		}
+	public TradingPost () {
+		
 	}
 
 	// returns array of all the numbers in the given String from the URL
-	public int[] createList(String list) {
+	private int[] createList(String list) {
 		list = list.substring(list.indexOf("["), list.lastIndexOf("]"));
 		list = list.replaceAll("[^0-9,]+", ""); // extracts only numbers and
 												// commas from previous string
@@ -54,7 +33,7 @@ public class TradingPost {
 
 	// returns list with objects containing quantity and Unit Price, the value
 	// for "listing" is being ignored
-	public List<Listing> outputList(int[] results) {
+	private List<Listing> outputList(int[] results) {
 		List<Listing> finalListing = new ArrayList<>();
 		for (int a = 2; a < results.length; a = a + 3) {
 			Listing listObject = new Listing(results[a], results[a - 1]);
@@ -75,7 +54,7 @@ public class TradingPost {
 	 * @param finalListing
 	 * @return characteristics
 	 */
-	public Characteristics getCharacteristics(List<Listing> finalListing) {
+	public static Characteristics getCharacteristics(List<Listing> finalListing) {
 		int min = Integer.MAX_VALUE;
 		int max = 0;
 		int allUP = 0;
@@ -102,7 +81,7 @@ public class TradingPost {
 			Collections.sort(uP); 
 	  		if (uP.size() % 2 == 0) {
 				median = (uP.get(uP.size()/2) + uP.get(uP.size()/2 + 1))/2; 
-			} else {
+			}else {
 			median = uP.get((uP.size()+1)/2); 
 			}
 		}
@@ -112,7 +91,7 @@ public class TradingPost {
 
 	public ItemCharacteristics getCharacteristics() throws Exception {
 
-		String values = loadUrl(url);
+		String values = UrlContent.loadUrl(url);
 		String[] all = values.split("sells");
 		String buy = all[0];
 		String sell = all[1];
