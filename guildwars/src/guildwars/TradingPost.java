@@ -80,9 +80,9 @@ public class TradingPost {
 			avg = (double) allUP / (double) allQ;
 			Collections.sort(uP); 
 	  		if (uP.size() % 2 == 0) {
-				median = (uP.get(uP.size()/2 - 1) + uP.get(uP.size()/2))/2; 
+				median = ((float) (uP.get(uP.size()/2 - 1) + uP.get(uP.size()/2))) /2.0; 
 			}else {
-			median = uP.get((uP.size()+1)/2); 
+				median = uP.get((uP.size()+1)/2); 
 			}
 		}
 		Characteristics characteristics = new Characteristics(min, max, avg, median);

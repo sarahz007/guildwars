@@ -29,7 +29,7 @@ public class ListingShortTest {
 		Assert.assertEquals(1, charac.getMinimum());
 		Assert.assertEquals(10, charac.getMaximum());
 		Assert.assertTrue(charac.getAverage() + " != " + 5.5, 5.5 == charac.getAverage());
-		Assert.assertTrue(charac.getMedian() + " != " + 5.0, 5.0 == charac.getMedian());
+		Assert.assertTrue(charac.getMedian() + " != " + 5.0, 5.5 == charac.getMedian());
 	}
 
 	@Test
@@ -45,54 +45,5 @@ public class ListingShortTest {
 		Assert.assertTrue(charac.getAverage() + " != " + 15.0 / 12.0, 15.0 / 12.0 == charac.getAverage());
 		Assert.assertTrue(charac.getMedian() + " != " + 1.0, 1.0 == charac.getMedian());
 	}
-	
-	/*@Test
-	public void medianWithEmptyList() {
-		List<Listing> listings = new ArrayList<>();
-		
-		double med = ListingShort.median(listings);
-		Assert.assertTrue(med + " != " + 0, 0 == med);
-	}
-	
-	@Test
-	public void medianOddLength() {
-		List<Listing> listings = new ArrayList<>();
-		listings.add(new Listing(1, 1));
-		listings.add(new Listing(1, 10));
-		listings.add(new Listing(1, 15));
-		
-		double med = ListingShort.median(listings);
-		Assert.assertTrue(med + " != " + 15.0, 15.0 == med);
-	}
-	
-	@Test
-	public void medianEvenLength() {
-		List<Listing> listings = new ArrayList<>();
-		listings.add(new Listing(3, 1));
-		listings.add(new Listing(1, 10));
-		
-		double med = ListingShort.median(listings);
-		Assert.assertTrue(med + " != " + 5.0, 5.0 == med);
-	}
-	
-	@Test
-	public void medianWithQuantity() {
-		List<Listing> listings = new ArrayList<>();
-		listings.add(new Listing(10, 1));
-		listings.add(new Listing(1, 10));
-		
-		double med = ListingShort.median(listings);
-		Assert.assertTrue(med + " != " + 1, 1 == med);
-	}
-	
-	@Test
-	public void medianWithEvenQuantity() {
-		List<Listing> listings = new ArrayList<>();
-		listings.add(new Listing(2, 1));
-		listings.add(new Listing(2, 10));
-		
-		double med = ListingShort.median(listings);
-		Assert.assertTrue(med + " != " + 10, 10 == med);
-	}*/
 	
 }
