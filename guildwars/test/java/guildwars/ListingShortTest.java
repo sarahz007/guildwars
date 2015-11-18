@@ -29,7 +29,7 @@ public class ListingShortTest {
 		Assert.assertEquals(1, charac.getMinimum());
 		Assert.assertEquals(10, charac.getMaximum());
 		Assert.assertTrue(charac.getAverage() + " != " + 5.5, 5.5 == charac.getAverage());
-		Assert.assertTrue(charac.getMedian() + " != " + 5.5, 5.5 == charac.getMedian());
+		Assert.assertTrue(charac.getMedian() + " != " + 5.0, 5.0 == charac.getMedian());
 	}
 
 	@Test

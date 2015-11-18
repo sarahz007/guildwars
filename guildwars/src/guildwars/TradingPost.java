@@ -80,7 +80,7 @@ public class TradingPost {
 			avg = (double) allUP / (double) allQ;
 			Collections.sort(uP); 
 	  		if (uP.size() % 2 == 0) {
-				median = (uP.get(uP.size()/2) + uP.get(uP.size()/2 + 1))/2; 
+				median = (uP.get(uP.size()/2 - 1) + uP.get(uP.size()/2))/2; 
 			}else {
 			median = uP.get((uP.size()+1)/2); 
 			}
